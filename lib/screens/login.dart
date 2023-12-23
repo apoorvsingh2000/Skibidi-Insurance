@@ -1,12 +1,9 @@
-import 'dart:html';
+import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:locl/constants.dart';
-import 'package:locl/home.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:locl/home.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,8 +18,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen>
     with SingleTickerProviderStateMixin {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
   bool showSpinner = false;
   late AnimationController controller;
   late Animation animation;
@@ -32,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen>
     super.initState();
 
     controller =
-        AnimationController(duration: const Duration(seconds: 3), vsync: this);
+        AnimationController(duration: const Duration(seconds: 2), vsync: this);
     animation = ColorTween(begin: Colors.blueGrey, end: Colors.white)
         .animate(controller);
     controller.forward();
@@ -82,26 +77,107 @@ class _LoginScreenState extends State<LoginScreen>
                 ],
               ),
               Container(
-                margin: EdgeInsets.only(
-                    right: MediaQuery.of(context).size.width * 0.1),
-                child: Material(
-                  elevation: 5.0,
-                  color: Colors.green[900],
-                  borderRadius: BorderRadius.circular(30.0),
-                  child: MaterialButton(
-                    onPressed: () {
-                      //async {
-                      //await signInWithGoogle();
-                      Navigator.pushNamed(context, HomeScreen.id);
-                    },
-                    height: 42.0,
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'Sign-in with Google',
-                        style: TextStyle(color: Colors.white, fontSize: 24.0),
+                height: MediaQuery.of(context).size.height * 0.3,
+                width: MediaQuery.of(context).size.height * 0.6,
+                decoration: BoxDecoration(
+                    color: kDarkColor, borderRadius: BorderRadius.circular(10)),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "E-mail",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 20.0),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.white),
+                                borderRadius: BorderRadius.circular(10),
+                                color: kCardColor),
+                            width: MediaQuery.of(context).size.width * 0.35,
+                            height: 30,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0, vertical: 5),
+                              child: TextFormField(
+                                decoration: const InputDecoration.collapsed(
+                                  hintText: "",
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          const Text(
+                            "Password",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 20.0),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.white),
+                                borderRadius: BorderRadius.circular(10),
+                                color: kCardColor),
+                            width: MediaQuery.of(context).size.width * 0.35,
+                            height: 30,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0, vertical: 5),
+                              child: TextFormField(
+                                decoration: const InputDecoration.collapsed(
+                                  hintText: "",
+                                ),
+                                obscureText: true,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                        ],
                       ),
-                    ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Material(
+                        elevation: 5.0,
+                        color: kCardColor,
+                        borderRadius: BorderRadius.circular(30.0),
+                        child: MaterialButton(
+                          onPressed: () => Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              transitionDuration: const Duration(seconds: 1),
+                              pageBuilder: (_, __, ___) => const HomeScreen(),
+                            ),
+                          ),
+                          height: 42.0,
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              'Submit',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 30.0,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
@@ -110,39 +186,5 @@ class _LoginScreenState extends State<LoginScreen>
         ),
       ),
     );
-  }
-
-  signInWithGoogle() async {
-    try {
-      setState(() {
-        showSpinner = true;
-      });
-      GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        idToken: googleAuth?.idToken,
-        accessToken: googleAuth?.accessToken,
-      );
-      final UserCredential authResult =
-          await _auth.signInWithCredential(credential);
-      final User? user = authResult.user;
-
-      if (user != null) {
-        Navigator.pushNamed(context, HomeScreen.id);
-      }
-      setState(() {
-        showSpinner = false;
-      });
-    } catch (e) {
-      if (kDebugMode) {
-        print(e);
-      }
-    }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    controller.dispose();
   }
 }

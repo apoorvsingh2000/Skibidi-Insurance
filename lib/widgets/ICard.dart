@@ -15,8 +15,7 @@ class ICard extends StatefulWidget {
 class _ICardState extends State<ICard> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //margin: const EdgeInsets.symmetric(vertical: 25.0, horizontal: 20.0),
+    return Expanded(
       child: InkWell(
         onTap: () {},
         child: Card(
@@ -48,14 +47,41 @@ class _ICardState extends State<ICard> {
                     Text(widget.item.price, style: textStyle()),
                     Text(widget.item.discount, style: textStyle()),
                     Text(widget.item.desc, style: textStyle()),
+                    const SizedBox(height: 10.0),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: kDarkColor),
+                      child: const Padding(
+                        padding: EdgeInsets.all(4.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              'Buy Policy',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 201, 243, 237),
+                              ),
+                            ),
+                            SizedBox(width: 12.0),
+                            InkWell(
+                              child: Icon(
+                                Icons.shopping_cart,
+                                color: Color.fromARGB(255, 201, 243, 237),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 Container(
                   color: Colors.green[900],
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Image.asset('images/logo.png',
-                        fit: BoxFit.contain, scale: 5),
+                    child: Image.asset(widget.item.image,
+                        fit: BoxFit.contain, scale: 15),
                   ),
                 ),
               ],

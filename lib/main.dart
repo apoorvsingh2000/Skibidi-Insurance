@@ -1,11 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:locl/home.dart';
+import 'package:locl/screens/AllPolicies.dart';
 import 'package:locl/screens/login.dart';
-import 'package:locl/screens/page1.dart';
-import 'package:locl/screens/page2.dart';
-import 'package:locl/screens/page3.dart';
+import 'package:locl/screens/FormPage.dart';
+import 'package:locl/screens/Suggestions.dart';
+import 'package:locl/screens/Dashboard.dart';
 import 'firebase_options.dart';
-
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -22,12 +22,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       routes: {
-        Page1.id: (context) => const Page1(),
-        Page2.id: (context) => const Page2(),
-        Page3.id: (context) => const Page3(),
+        FormPage.id: (context) => const FormPage(),
+        Suggestions.id: (context) => const Suggestions(),
+        Dashboard.id: (context) => const Dashboard(),
         HomeScreen.id: (context) => const HomeScreen(),
         LoginScreen.id: (context) => const LoginScreen(),
+        AllPolicies.id: (context) => const AllPolicies(),
       },
       initialRoute: LoginScreen.id,
     );

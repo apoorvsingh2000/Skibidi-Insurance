@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:locl/models/ICardItem.dart';
 
-var kCardColor = const Color.fromARGB(255, 201, 243, 237);
-var kDarkColor = const Color.fromARGB(255, 27, 95, 86);
+Color kCardColor = const Color.fromARGB(255, 201, 243, 237);
+Color kDarkColor = const Color.fromARGB(255, 27, 95, 86);
 // 00BFA6
 
 TextStyle textStyle() {
@@ -16,9 +16,9 @@ TextStyle textStyle() {
 }
 
 ICardItem kCardItem() => ICardItem(
-    "Super duper Health Insurance",
-    "1862.05",
-    "7",
-    "5",
-    "This is a super duper good policy. Buy it. Extremely good. Yaas queen!",
-    "images/logo.png");
+    "Fitness and Wellness Program",
+    "Price: \t 200.00 USD",
+    "Category: \t weight",
+    "Duration: \t 2 years",
+    "Encourages a healthy lifestyle with fitness guidance.",
+    "images/fitness.png");
