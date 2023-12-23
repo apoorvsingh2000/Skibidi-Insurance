@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:locl/constants.dart';
 import 'package:locl/models/ICardItem.dart';
+import 'package:locl/screens/AllPolicies.dart';
+import 'package:locl/screens/FormPage.dart';
 import 'package:locl/widgets/ICard.dart';
 
 class Suggestions extends StatefulWidget {
@@ -77,11 +79,36 @@ class _SuggestionsState extends State<Suggestions> {
                 Container(
                   alignment: Alignment.center,
                   margin: EdgeInsets.only(
+                      right: MediaQuery.of(context).size.width * 0.02),
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        'images/ai.png',
+                        scale: 20,
+                      ),
+                      const SizedBox(width: 10.0),
+                      InkWell(
+                        onTap: () => Navigator.pushNamed(context, FormPage.id),
+                        child: Text(
+                          'Suggested Policies',
+                          style: TextStyle(
+                            fontFamily: GoogleFonts.roboto().fontFamily,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.only(
                       right: MediaQuery.of(context).size.width * 0.05),
                   child: InkWell(
-                    onTap: () => Navigator.pushNamed(context, Suggestions.id),
+                    onTap: () => Navigator.pushNamed(context, AllPolicies.id),
                     child: Text(
-                      'Suggested Policies',
+                      'All Policies',
                       style: TextStyle(
                         fontFamily: GoogleFonts.roboto().fontFamily,
                         fontSize: 16,
