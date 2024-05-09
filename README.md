@@ -26,7 +26,8 @@ Skibidi follows a 3-tier architecture:
 - **Application Layer (Business Logic)**: Built with Django, this layer handles the core functionality and business logic of the application.
 - **Data Layer (Database)**: Uses MySQL for data storage and management, initially set up locally and migrated to Azure for scalability and security.
 
-![Application Architecture](https://path/to/architecture/diagram)
+## Application Architecture
+![image](https://github.com/apoorvsingh2000/Skibidi-Insurance/assets/58786316/de5b9852-3bbd-4c15-a1d5-192295f5a038)
 
 ## Backend API
 
@@ -81,14 +82,17 @@ To set up the Skibidi Insurance Application:
 
 1. **Clone the repositories**:
    ```bash
-   git https://github.com/apoorvsingh2000/Skibidi-Insurance.git
+   git clone https://github.com/Skibidi-Insurance-Project/Skibidi-be.git
+   git clone https://github.com/Skibidi-Insurance-Project/Skibidi-Insurance.git
 
 2. Install dependencies for the backend (Django):
    ```bash
+   cd Skibidi-be
    pip install -r requirements.txt
    
 3. Install dependencies for the frontend (Flutter):
    ```bash
+   cd Skibidi-Insurance
    flutter pub get
    
 4. Start the Django backend server:
@@ -103,8 +107,8 @@ To set up the Skibidi Insurance Application:
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Authors
-Apoorv Singh
-Raghav Mantri
+- Apoorv Singh
+- Raghav Mantri
 
 ## Acknowledgments
 Special thanks to NYU and Dr. Jean-Claude Franchitti for their guidance and support throughout the development of this project.
